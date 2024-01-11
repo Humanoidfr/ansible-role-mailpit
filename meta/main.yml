@@ -1,4 +1,7 @@
 ---
+dependencies:
+  - geerlingguy.daemonize
+
 galaxy_info:
   role_name: mailpit
   author: swalkinshaw

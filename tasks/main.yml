@@ -14,6 +14,15 @@
     dest: "{{ mailpit_install_dir }}"
     remote_src: yes
 
+- name: Copy mailpit init script into place.
+  template:
+    src: mailpit.init.j2
+    dest: /etc/init.d/mailpit
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr != 'systemd'"
+
 - name: Copy mailpit systemd unit file into place
   template:
     src: mailpit.unit.j2
@@ -21,6 +30,7 @@
     owner: root
     group: root
     mode: 0755
+  when: "ansible_service_mgr != 'systemd'"
 
 - name: Ensure mailpit is enabled and will start on boot
   service:

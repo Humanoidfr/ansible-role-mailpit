@@ -1,0 +1,61 @@
+#! /bin/sh
+# /etc/init.d/mailpit
+#
+# mailpit init script.
+#
+# @author Jeff Geerling
+
+### BEGIN INIT INFO
+# Provides:          mailpit
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start mailpit at boot time.
+# Description:       Enable mailpit.
+### END INIT INFO
+
+PID=/var/run/mailpit.pid
+LOCK=/var/lock/mailpit.lock
+USER=nobody
+BIN={{ mailpit_install_dir }}/mailpit
+DAEMONIZE_BIN={{ mailpit_daemonize_bin_path }}
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting mailpit."
+    $DAEMONIZE_BIN -p $PID -l $LOCK -u $USER $BIN
+    ;;
+  stop)
+    if [ -f $PID ]; then
+      echo "Stopping mailpit.";
+      kill -TERM $(cat $PID);
+      rm -f $PID;
+    else
+      echo "mailpit is not running.";
+    fi
+    ;;
+  restart)
+    echo "Restarting mailpit."
+    if [ -f $PID ]; then
+      kill -TERM $(cat $PID);
+      rm -f $PID;
+    fi
+    $DAEMONIZE_BIN -p $PID -l $LOCK -u $USER $BIN
+    ;;
+  status)
+    if [ -f $PID ]; then
+      echo "mailpit is running.";
+    else
+      echo "mailpit is not running.";
+      exit 3
+    fi
+    ;;
+  *)
+    echo "Usage: /etc/init.d/mailpit {start|stop|status|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0
