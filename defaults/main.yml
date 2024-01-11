@@ -4,4 +4,4 @@ mailpit_install_dir: /opt/mailpit
 mailpit_version: 1.3.8
 mailpit_release_url: "https://github.com/axllent/mailpit/releases/download/v{{ mailpit_version }}/mailpit-linux-{{ mailpit_arch }}.tar.gz"
 
-mailhog_daemonize_bin_path: /usr/sbin/daemonize
+mailpit_daemonize_bin_path: /usr/sbin/daemonize
