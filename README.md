@@ -1,3 +1,11 @@
+> [!WARNING]
+> **Ce dépôt a été migré sur GitLab le 01/10/2026 et n'est plus maintenu ici.**
+>
+> - Nouveau dépôt : https://gitlab.humanoid.fr/humanoid/ansible-role-mailpit
+> - Contributions et merge requests se font désormais depuis GitLab.
+> - Fork de `roots/ansible-role-mailpit` (6 commits propres). Consommé par le `galaxy.yml` de `humanoid/ansible`, désormais depuis GitLab.
+> - Ce dépôt GitHub est archivé en lecture seule. Suivi de la migration : PRO-6330.
+
 # Ansible Role: Mailpit
 
 <p align="center">
